@@ -107,7 +107,7 @@ font-family: unset;
 ## [选择某类的最后一个元素](https://juejin.cn/post/6844904072206614535) 
 
 - :first-child / :last-child
-  - :first-child：选择属于其父元素的首个子元素的每个子元
+  - :first-child：选择属于其父元素的首个子元素的每个子元素
   - :last-child：选择属于其父元素的最后一个子元素的每个子元素
 
 > 总结：
