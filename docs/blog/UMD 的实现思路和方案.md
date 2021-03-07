@@ -16,8 +16,6 @@
 }))
 ```
 
-
-
 兼容 AMD 规范
 
 ```js
@@ -36,8 +34,6 @@
     }
 }))
 ```
-
-
 
 兼容 CommonJS 和 CMD 规范
 
@@ -97,3 +93,9 @@
 }))
 ```
 
+
+
+## 参考
+
+-  [可能是最详细的UMD模块入门指南](https://segmentfault.com/a/1190000020226119)
+- [UMD-Github](https://github.com/umdjs/umd)
