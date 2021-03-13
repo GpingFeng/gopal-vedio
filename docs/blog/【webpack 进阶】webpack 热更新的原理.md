@@ -195,7 +195,7 @@ ws.onclose = function(evt) {
 
 通过上面的流程图，其实我们可以猜测，**本地实际上启动了一个 `HMR Server` 服务，而且在启动 `Bundle Server` 的时候已经往我们的 `bundle.js` 中注入了 `HMR Runtime`(主要用来启动 `Websocket`，接受 `HMR Server` 发来的变更)**
 
-所以我们聚焦放在以下几点：
+所以我们聚焦以下几点：
 
 - `Webpack` 如何启动了 HMR Server
 - HMR Server 如何跟 HMR Runtime 进行通信的
@@ -372,18 +372,18 @@ hotEmitter.on("webpackHotUpdate", function (currentHash) {
 ```
 
 ```js
-	var check = function check() {
-		//  moudle.hot.check 开始热更新
-		// 之后的源码都是HotModuleReplacementPlugin塞入到bundle.js中的哦，我就不写文件路径了
-		module.hot
-			.check(true)
-			.then(function (updatedModules) {
-				// ...
-			})
-			.catch(function (err) {
-				// ...
-			});
-	};
+var check = function check() {
+  //  moudle.hot.check 开始热更新
+  // 之后的源码都是HotModuleReplacementPlugin塞入到bundle.js中的哦，我就不写文件路径了
+  module.hot
+    .check(true)
+    .then(function (updatedModules) {
+      // ...
+    })
+    .catch(function (err) {
+      // ...
+    });
+};
 ```
 
 至于 `module.hot.check` ，实际上通过 `HotModuleReplacementPlugin` 已经注入到我们 `chunk ` 中了（也就是我们上面所说的 HMR Runtime），所以后面就是它是如何更新 `bundle.js` 的呢？
@@ -402,32 +402,32 @@ module.hot = createModuleHotObject(options.id, module);
 
 ```js
 function createModuleHotObject(moduleId, me) {
-	var hot = {
-		// Module API
-		addDisposeHandler: function (callback) {
-			hot._disposeHandlers.push(callback);
-		},
-		removeDisposeHandler: function (callback) {
-			var idx = hot._disposeHandlers.indexOf(callback);
-			if (idx >= 0) hot._disposeHandlers.splice(idx, 1);
-		},
-		// Management API
-		check: hotCheck,
-		apply: hotApply,
-		status: function (l) {
-			if (!l) return currentStatus;
-			registeredStatusHandlers.push(l);
-		},
-		addStatusHandler: function (l) {
-			registeredStatusHandlers.push(l);
-		},
-		removeStatusHandler: function (l) {
-			var idx = registeredStatusHandlers.indexOf(l);
-			if (idx >= 0) registeredStatusHandlers.splice(idx, 1);
-		},
-	};
-	currentChildModule = undefined;
-	return hot;
+  var hot = {
+    // Module API
+    addDisposeHandler: function (callback) {
+      hot._disposeHandlers.push(callback);
+    },
+    removeDisposeHandler: function (callback) {
+      var idx = hot._disposeHandlers.indexOf(callback);
+      if (idx >= 0) hot._disposeHandlers.splice(idx, 1);
+    },
+    // Management API
+    check: hotCheck,
+    apply: hotApply,
+    status: function (l) {
+      if (!l) return currentStatus;
+      registeredStatusHandlers.push(l);
+    },
+    addStatusHandler: function (l) {
+      registeredStatusHandlers.push(l);
+    },
+    removeStatusHandler: function (l) {
+      var idx = registeredStatusHandlers.indexOf(l);
+      if (idx >= 0) registeredStatusHandlers.splice(idx, 1);
+    },
+  };
+  currentChildModule = undefined;
+  return hot;
 }
 ```
 
@@ -435,8 +435,8 @@ function createModuleHotObject(moduleId, me) {
 
 ```js
 function hotCheck(applyOnUpdate) {
-	setStatus("check");
-	return __webpack_require__.hmrM().then(function (update) {
+  setStatus("check");
+    return __webpack_require__.hmrM().then(function (update) {
   }
 }
 ```
@@ -447,12 +447,12 @@ function hotCheck(applyOnUpdate) {
 
 ```js
 __webpack_require__.hmrM = () => {
-	if (typeof fetch === "undefined") throw new Error("No browser support: need fetch API");
-	return fetch(__webpack_require__.p + __webpack_require__.hmrF()).then((response) => {
-		if(response.status === 404) return; // no update available
-		if(!response.ok) throw new Error("Failed to fetch update manifest " + response.statusText);
-		return response.json();
-	});
+  if (typeof fetch === "undefined") throw new Error("No browser support: need fetch API");
+  return fetch(__webpack_require__.p + __webpack_require__.hmrF()).then((response) => {
+    if(response.status === 404) return; // no update available
+    if(!response.ok) throw new Error("Failed to fetch update manifest " + response.statusText);
+    return response.json();
+  });
 };
 ```
 
@@ -469,15 +469,15 @@ __webpack_require__.hmrM = () => {
 
 ```js
 function loadUpdateChunk(chunkId) {
-	return new Promise((resolve, reject) => {
-		var url = __webpack_require__.p + __webpack_require__.hu(chunkId);
-		// create error before stack unwound to get useful stacktrace later
-		var error = new Error();
-		var loadingEnded = (event) => {
-			// ...加载后的处理
-		};
-		__webpack_require__.l(url, loadingEnded);
-	});
+  return new Promise((resolve, reject) => {
+    var url = __webpack_require__.p + __webpack_require__.hu(chunkId);
+    // create error before stack unwound to get useful stacktrace later
+    var error = new Error();
+    var loadingEnded = (event) => {
+      // ...加载后的处理
+    };
+    __webpack_require__.l(url, loadingEnded);
+  });
 }
 ```
 
@@ -502,26 +502,30 @@ __webpack_require__.l = (url, done, key, chunkId) => {
 };
 ```
 
-还记得我们一开始提到的返回的 JS 中就是一个 `webpackHotUpdate` 函数么？实际上在我们的 HMR Runtime 中就是全局定义了（下面的名称是 webpackHotUpdatelearn_hot_reload，我猜想应该是 webpack 版本不一样导致的）至于生成的代码是如何生效的，请移步我的另外一篇文章——[【Webpack 进阶】Webpack 打包后的代码是怎样的？](https://juejin.cn/post/6937086236926410783)
+还记得我们一开始提到的返回的 JS 中就是一个 `webpackHotUpdate` 函数么？实际上在我们的 HMR Runtime 中就是全局定义了（下面的名称是 webpackHotUpdatelearn_hot_reload，应该是 webpack 版本不一样导致的，不影响理解）至于生成的代码是如何生效的，请移步我的另外一篇文章——[【Webpack 进阶】Webpack 打包后的代码是怎样的？](https://juejin.cn/post/6937086236926410783)
 
 ```js
 // webpackHotUpdate + 项目名
 self["webpackHotUpdatelearn_hot_reload"] = (chunkId, moreModules, runtime) => {
-	for(var moduleId in moreModules) {
-		if(__webpack_require__.o(moreModules, moduleId)) {
-			currentUpdate[moduleId] = moreModules[moduleId];
-			if(currentUpdatedModulesList) currentUpdatedModulesList.push(moduleId);
-		}
-	}
-	if(runtime) currentUpdateRuntime.push(runtime);
-	if(waitingUpdateResolves[chunkId]) {
-		waitingUpdateResolves[chunkId]();
-		waitingUpdateResolves[chunkId] = undefined;
-	}
+  for(var moduleId in moreModules) {
+    if(__webpack_require__.o(moreModules, moduleId)) {
+      currentUpdate[moduleId] = moreModules[moduleId];
+      if(currentUpdatedModulesList) currentUpdatedModulesList.push(moduleId);
+    }
+  }
+  if(runtime) currentUpdateRuntime.push(runtime);
+  if(waitingUpdateResolves[chunkId]) {
+    waitingUpdateResolves[chunkId]();
+    waitingUpdateResolves[chunkId] = undefined;
+  }
 };
 ```
 
 所以，客户端接受到服务器端推动的消息后，如果需要热更新，**浏览器发起 http 请求去服务器端获取新的模块资源解析并局部刷新页面**
+
+以上整体的流程如下所示：
+
+![](https://upload-images.jianshu.io/upload_images/1784460-a2107e6d277fac46.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ## 总结
 
