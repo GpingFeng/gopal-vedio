@@ -1,4 +1,4 @@
-## npm script 中使用 cache 导致缓存失效
+### npm script 中使用 cache 导致缓存失效
 在一次 `webpack` 优化中，在 `npm script` 中定义了一个命令行参数，在 `webpack` 的配置脚本中使用（主要是用来判别是否开启缓存），类似如下
 
 ```json
