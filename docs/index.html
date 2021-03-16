@@ -7,6 +7,8 @@
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <!-- 支持评论 -->
+  <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
   <link rel="icon" href="./img/no.png" type="image/x-icon" />
 </head>
 <body>
@@ -33,5 +35,19 @@
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+  <!-- 支持评论 -->
+  <script src="//unpkg.com/docsify/lib/plugins/gitalk.min.js"></script>
+  <script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script>
+    const gitalk = new Gitalk({
+      clientID: 'b60778fef5b0ff9e8961',
+      clientSecret: 'ab62e0bd0eb21303332aacd45525a26e2d48ad0e',
+      repo: 'no-problem', // 填写你要保存评论的仓库名字
+      owner: 'GpingFeng', // 就是你的 Github 名字
+      admin: ['GpingFeng'], // 就是你的 Github 名字
+      // facebook-like distraction free mode
+      distractionFreeMode: false
+    })
+  </script>
 </body>
 </html>
