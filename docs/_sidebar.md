@@ -1,11 +1,13 @@
+* JavaScript
+  * [精度丢失](number.md)
 * CSS
-  * [font-family 继承失效了？](fontFamily.md)
+  * [font-family 继承失效问题](fontFamily.md)
   * [伪类不生效的原因](pseudoClasses.md)
-  * [选择某类的最后一个元素](selectLast.md)
+  * [选择最后一个元素没有生效](selectLast.md)
 * 工具
-  * [Network](networkToole.md)
+  * [Chrome 中 Network 小技巧](networkToole.md)
   * [XMLHttpRequest](XMLHttpRequest.md)
-  * [Git](git.md)
+  * [Git 无法检测到文件大小写](git.md)
 * webpack
   * [webpack 缓存失效](cache.md)
 * 网络
