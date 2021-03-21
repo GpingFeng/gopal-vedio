@@ -13,7 +13,11 @@
 }
 ```
 
-[关于 content  属性](https://developer.mozilla.org/zh-CN/docs/Web/CSS/content)
+### content 属性的探索
+
+MDN 中的 [content 属性](https://developer.mozilla.org/zh-CN/docs/Web/CSS/content) 的解释
+
+以下为 content 属性的一些作用，重点会说下 counter()
 
 - 填充字符串
 -  `url()`、`URI()`。 URI 值会指定一个外部资源（比如图片）。如果该资源或图片不能显示，它就会被忽略或显示一些占位（比如无图片标志）
