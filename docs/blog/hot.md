@@ -523,8 +523,7 @@ self["webpackHotUpdatelearn_hot_reload"] = (chunkId, moreModules, runtime) => {
 
 以上整体的流程如下所示：
 
-![](https://upload-images.jianshu.io/upload_images/1784460-a2107e6d277fac46.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
+![](https://upload-images.jianshu.io/upload_images/1784460-777bab506b4ab041.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ## 总结
 
 本文介绍了 `webpack` 热更新的简单使用、相关的流程以及原理。小结一下，webpack 如果开启了热更新的时候
