@@ -2,14 +2,14 @@
 如果 Mac 设置了触控板如下所示，在浏览器中（这里指的是 Chrome，其他的没有验证）浏览页面的时候，双指不仅可以可以控制左右滚动，而且可以控制前进后退
 
 
-![](https://upload-images.jianshu.io/upload_images/1784460-e984c3885af28727.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 ":size=800")
+![](./img/mac.png ":size=800")
 
 
 这很容易造成“误触”的情况，比如一个表单，我填写了很多的内容，我在一个表格中左右滚动的时候，返回了前一个页面，我在页面中填了很多的东西就会不见...我心中一万只那啥飘过。
 
 问题演示如下
 
-![](https://upload-images.jianshu.io/upload_images/1784460-92b9c7b02dc5a7b7.gif?imageMogr2/auto-orient/strip)
+![](./img/back-demo.gif ":size=800")
 
 ## 问题分析
 为什么会触发返回事件？
@@ -61,7 +61,7 @@ const element = document.getElementsByClassName('container')[0];
 
 `contain` 默认的滚动溢出行为将被内部的元素观察到，(例如: “bounce” 效果或者刷新)，但是相邻的区域不会产生连续滚动效果，例如：在下面的元素不会被滚动。
 
-这里看一个例子，可以默认情况下，内部容器滚动到最底部的时候，会触发整个页面进行滚动。如果我们不想这个时候整个页面进行滚动，就可以设置 `overscroll-behavior-x: contain;` 在内部的盒子中
+这里看[一个例子](https://codepen.io/gpingfeng/pen/eYgRNqX)，可以默认情况下，内部容器滚动到最底部的时候，会触发整个页面进行滚动。如果我们不想这个时候整个页面进行滚动，就可以设置 `overscroll-behavior-x: contain;` 在内部的盒子中
 
 <iframe height="265" style="width: 100%;" scrolling="no" title="overscroll-behavior" src="https://codepen.io/gpingfeng/embed/eYgRNqX?height=265&theme-id=light&default-tab=html,result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/gpingfeng/pen/eYgRNqX'>overscroll-behavior</a> by Guangping
@@ -70,7 +70,7 @@ const element = document.getElementsByClassName('container')[0];
 
 缺点的话，就是浏览器的兼容性并不是特别理想，但对于我们 TOB 的项目来说是足够的了
 
-![](https://upload-images.jianshu.io/upload_images/1784460-b6653b71f411ec1a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 ":size=800")
+![](./img/overscroll.png ":size=800")
 
 ## 其他：touch-action
 这个方案是基于移动端开发的，实际上跟这次谈论的还是有点区别，这里单纯记录一下
