@@ -66,7 +66,7 @@ clickMe() {
 
 浏览器会去请求两个文件 
 
-![](https://upload-images.jianshu.io/upload_images/1784460-54005b7f50edf5f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://tva1.sinaimg.cn/large/008eGmZEgy1gp8pp6wrdaj30si0aktax.jpg)
 
 接下来我们看看这两个文件：
 
@@ -181,7 +181,7 @@ ws.onclose = function(evt) {
 
 
 
-![](https://upload-images.jianshu.io/upload_images/1784460-67579c84fb6fe1ef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://tva1.sinaimg.cn/large/008eGmZEgy1gp8ppb32vjj30uq0e6q6m.jpg)
 
 
 
@@ -523,7 +523,7 @@ self["webpackHotUpdatelearn_hot_reload"] = (chunkId, moreModules, runtime) => {
 
 以上整体的流程如下所示：
 
-![](https://upload-images.jianshu.io/upload_images/1784460-777bab506b4ab041.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://tva1.sinaimg.cn/large/008eGmZEgy1gp8ppfpbouj30r70e875c.jpg)
 ## 总结
 
 本文介绍了 `webpack` 热更新的简单使用、相关的流程以及原理。小结一下，webpack 如果开启了热更新的时候
@@ -534,7 +534,7 @@ self["webpackHotUpdatelearn_hot_reload"] = (chunkId, moreModules, runtime) => {
 - 在编译结束的时候，通过 `compiler.hooks.done`，监听并通知客户端
 - 客户端接收到之后，就会调用  `module.hot.check` 等，发起 http 请求去服务器端获取新的模块资源解析并局部刷新页面
 
-![](https://upload-images.jianshu.io/upload_images/1784460-67579c84fb6fe1ef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://tva1.sinaimg.cn/large/008eGmZEgy1gp8ppjq4i7j30uq0e6q6m.jpg)
 
 ## 参考
 
