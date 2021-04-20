@@ -6,9 +6,9 @@
 
 > A **CSS Modules** is a CSS file in which all class names and animation names are scoped locally by default.
 
-所有的类名和动画名称默认都有各自的作用域的 `CSS` 文件。CSS Modules 并不是 CSS 官方的标准，也不是浏览器的特性，而是使用一些构建工具，比如 webpack，对 CSS 类名和选择器限定作用域的一种方式（类似命名空间）
+所有的类名和动画名称默认都有各自的作用域的 `CSS` 文件。CSS Modules 并不是 CSS 官方的标准，也不是浏览器的特性，而是使用一些构建工具，比如 `webpack`，对 `CSS` 类名和选择器限定作用域的一种方式（类似命名空间）
 
-本文来介绍一下 CSS Modules 的简单使用，以及 CSS Modules 的实现原理（CSS-loader 中的实现）
+本文来介绍一下 `CSS Modules` 的简单使用，以及` CSS Modules` 的实现原理（CSS-loader 中的实现）
 
 ## CSS Modules 的简单使用
 
@@ -19,10 +19,11 @@
 ```bash
 npx create-react-app learn-css-modules-react
 cd learn-css-modules-react
+# 显示 webpack 的配置
 yarn eject
 ```
 
-看到 `config/webpack.config.js`，默认情况下，React 脚手架搭建出来的项目，只有 `.module.css` 支持模块化
+看到 `config/webpack.config.js`，默认情况下，React 脚手架搭建出来的项目，只有 `.module.css` 支持模块化，如果是自己搭建的话，可以支持 .css 文件的后缀等
 
 ```js
 // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
@@ -41,34 +42,32 @@ yarn eject
 }
 ```
 
-其中 getStyleLoaders 函数，可以看到配置 css-loader 
+其中 getStyleLoaders 函数，可以看到 css-loader 的配置
 
 ```js
-  const getStyleLoaders = (cssOptions, preProcessor) => {
-    const loaders = [
-      // ...
-      {
-        loader: require.resolve('css-loader'),
-        options: cssOptions,
-      },
-      // ...
-    ];
+const getStyleLoaders = (cssOptions, preProcessor) => {
+  const loaders = [
     // ...
-    return loaders;
-  };
+    {
+      loader: require.resolve('css-loader'),
+      options: cssOptions,
+    },
+    // ...
+  ];
+  // ...
+  return loaders;
+};
 ```
 
-我们就基于这个环境当做示例
+我们就基于这个环境当做示例进行演示
 
 ### 局部作用域
 
-将 `App.css` 修改成 `App.module.css`
-
 之前的样式
 
-![](img/CSS Module/image-20210418121302565.png)
+![](https://tva1.sinaimg.cn/large/008eGmZEgy1gpo9r880m9j31qq0ao0x6.jpg)
 
-我们导入 css，并设置
+首先，我们将 `App.css` 修改成 `App.module.css`，然后导入 css，并设置（这里有个小知识点，实际上 CSS Modules 推荐的命名是驼峰式，主要是这样的话，使用对象` style.className` 就可以访问。如果是如下，就需要 `styles['***-***']）`
 
 ```jsx
 import styles from './App.module.css';
@@ -79,7 +78,7 @@ import styles from './App.module.css';
 
 就会根据特定的规则生成相应的类名
 
-![](img/CSS Module/image-20210418124516803.png)
+![](https://tva1.sinaimg.cn/large/008eGmZEgy1gpo9rcf1kcj31sm0bcgq1.jpg)
 
 这个命名规则是可以通过 CSS-loader 进行配置，类似如下的配置：
 
@@ -97,7 +96,9 @@ module: {
 
 ### 全局作用域
 
-我们发现，在 css modules 中定义的类名得通过类似设置变量的方式给 HTML 设置，那么我能像其他的 CSS 文件一样直接使用类名（也就是普通的设置方法），而不是编译后的哈希字符串么？
+默认情况下，我们发现，在 css modules 中定义的类名必须得通过类似设置变量的方式给 `HTML` 设置（如上示例所示）
+
+那么我能像其他的 `CSS` 文件一样直接使用类名（也就是普通的设置方法），而不是编译后的哈希字符串么？
 
 使用 `:global` 的语法，就可以声明一个全局的规则
 
@@ -109,7 +110,7 @@ module: {
 
 这样就可以在 HTML 中直接跟使用普通的 CSS 一样了
 
-但这里感觉就是 CSS Modules 给开发者留的一个后门，我们这样的 CSS，还是直接放在普通 .css 文件中比较好（个人的不成熟的建议）
+但这里感觉就是 CSS Modules 给开发者留的一个后门，我们这样的 CSS，还是直接放在普通 .css 文件中比较好，我理解这就是 React 为什么对待 .css 和 .module.css 不同后缀进行不同的处理的原因
 
 ### Class 的组合
 
@@ -130,7 +131,7 @@ module: {
 
 
 
-![](img/CSS Module/image-20210418125512741.png)
+![](https://tva1.sinaimg.cn/large/008eGmZEgy1gpo9roz0avj31rc0hygsa.jpg)
 
 ### 输入其他的模块
 
@@ -156,7 +157,7 @@ module: {
 
 
 
-![](img/CSS Module/image-20210418125726167.png)
+![](https://tva1.sinaimg.cn/large/008eGmZEgy1gpo9roc6knj31rc0hygsa.jpg)
 
 ### 使用变量
 
@@ -180,13 +181,13 @@ module: {
 
 
 
-![](img/CSS Module/image-20210418130002303.png)
+![](https://tva1.sinaimg.cn/large/008eGmZEgy1gpo9rqwam8j31ru0gy0yy.jpg)
 
 
 
 ### 使用小结
 
-总体而言，CSS Modules 的使用偏简单，上手非常的快，接下来我们看看 Webpack 中 CSS-loader 是怎么实现 CSS Modules 的
+总体而言，CSS Modules 的使用偏简单，上手非常的快，接下来我们看看 Webpack 中 `CSS-loader `是怎么实现 `CSS Modules` 的
 
 ## CSS Modules 的实现原理
 
@@ -227,7 +228,7 @@ var modulesValues = require("postcss-modules-values");
 
 #### 默认的命名规则
 
-实际上，假如你设置任何的规则时候会根据如下进行命名
+实际上，假如你没有设置任何的规则时候会根据如下进行命名
 
 ```js
 // 生成 Scoped name 的方法（没有传入的时候的默认规则）
@@ -244,6 +245,7 @@ var processor = _postcss2['default'].plugin('postcss-modules-scope', function (o
   // ...
   return function (css) {
     // 如果有传入，则采用传入的命名规则
+   	// 否则，采用默认定义的 processor.generateScopedName
     var generateScopedName = options && options.generateScopedName || processor.generateScopedName;
   }
   // ...
@@ -252,9 +254,9 @@ var processor = _postcss2['default'].plugin('postcss-modules-scope', function (o
 
 #### 前置知识—— postcss 遍历样式的方法
 
-css ast 主要有 3 种父类型
+`css ast` 主要有 3 种父类型
 
-- AtRule: @xxx 的这种类型，如 @screen
+- AtRule: @xxx 的这种类型，如 @screen，因为下面会提到变量的使用 `@value`
 - Comment: 注释
 - Rule: 普通的 css 规则
 
@@ -275,13 +277,13 @@ css ast 主要有 3 种父类型
 
 ```js
 // Find any :local classes
-// 找到 :local 的 classes
+// 找到所有的含有 :local 的 classes
 css.walkRules(function (rule) {
   var selector = _cssSelectorTokenizer2['default'].parse(rule.selector);
-  // 递归获取 selector
+  // 获取 selector
   var newSelector = traverseNode(selector);
   rule.selector = _cssSelectorTokenizer2['default'].stringify(newSelector);
-  // 遍历每一条规则，假如匹配到则转换成作用域名称
+  // 遍历每一条规则，假如匹配到则将类名等转换成作用域名称
   rule.walkDecls(function (decl) {
     var tokens = decl.value.split(/(,|'[^']*'|"[^"]*")/);
     tokens = tokens.map(function (token, idx) {
@@ -305,7 +307,7 @@ css.walkRules(function (rule) {
 css.walkRules 遍历所有节点信息，无论是 atRule、rule、comment 的父类型，还是 `rule`、 `decl` 的子类型，获取 selector
 
 ```js
-// 递归遍历节点
+// 递归遍历节点，找到目标节点
 function traverseNode(node) {
   switch (node.type) {
     case 'nested-pseudo-class':
@@ -326,7 +328,7 @@ function traverseNode(node) {
 }
 ```
 
-walkDecls 遍历每一条规则，生成相应的 Scoped Name
+`walkDecls` 遍历每一条规则，生成相应的 `Scoped Name`
 
 ```js
 // 生成一个 Scoped Name
@@ -344,19 +346,24 @@ function exportScopedName(name) {
 
 ### postcss-modules-values
 
-这个库的主要作用是在模块文件之间传递任意值
+这个库的主要作用是在模块文件之间传递任意值，主要是为了实现在 CSS Modules 中能够使用变量
 
 它的实现也是只有一个文件，具体[查看这里](https://github.com/css-modules/postcss-modules-values/blob/master/src/index.js)
 
-查看所有的 @value 语句，并将它们视为局部变量或导入的
+查看所有的 `@value` 语句，并将它们视为局部变量或导入的，最后保存到 `definitions` 对象中
 
 ```js
 /* Look at all the @value statements and treat them as locals or as imports */
 // 查看所有的 @value 语句，并将它们视为局部变量还是导入的
 css.walkAtRules('value', atRule => {
+  // 类似如下的写法
+  // @value primary, secondary from colors 
   if (matchImports.exec(atRule.params)) {
     addImport(atRule)
   } else {
+    // 处理定义在文件中的 类似如下
+    // @value primary: #BF4040;
+		// @value secondary: #1F4F7F;
     if (atRule.params.indexOf('@value') !== -1) {
       result.warn('Invalid value definition: ' + atRule.params)
     }
@@ -369,7 +376,6 @@ css.walkAtRules('value', atRule => {
 假如是导入的，调用的 addImport 方法
 
 ```js
-// 添加 import 方法
 const addImport = atRule => {
   // 如果有 import 的语法
   let matches = matchImports.exec(atRule.params)
@@ -382,20 +388,20 @@ const addImport = atRule => {
       if (tokens) {
         let [/*match*/, theirName, myName = theirName] = tokens
         let importedName = createImportedName(myName)
-        // 根据 import 的语法，进行定义
         definitions[myName] = importedName
         return { theirName, importedName }
       } else {
         throw new Error(`@import statement "${alias}" is invalid!`)
       }
     })
+    // 最后会根据这个生成 import 的语法
     importAliases.push({ path, imports })
     atRule.remove()
   }
 }
 ```
 
-否则则直接 addDefinition
+否则则直接 addDefinition，两个的思想大致我理解都是找到响应的变量，然后替换
 
 ```js
 // 添加定义

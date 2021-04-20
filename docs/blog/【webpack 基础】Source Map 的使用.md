@@ -143,7 +143,7 @@ app.append(heading)
 
 ![](https://tva1.sinaimg.cn/large/008eGmZEgy1gpml3upk0mj30pu05g3z5.jpg)
 
-![image-20210417113405705](【webpack 基础】Source Map 的使用.assets/image-20210417113405705.png)
+![image-20210417113405705](https://tva1.sinaimg.cn/large/008eGmZEgy1gppcekv22vj30s409s40k.jpg)
 
 ### devtool: 'cheap-source-map'
 
