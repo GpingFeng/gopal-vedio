@@ -42,3 +42,7 @@ Options:
 
 反思：
 - 命名尽量特殊化
+
+
+### 常见的一些 npm Scripts
+https://webpack.js.org/api/cli/#flags
