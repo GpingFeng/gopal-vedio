@@ -1,10 +1,10 @@
-# 【webpack】聊聊 Source Map 的使用
+# 【Webpack】聊聊 Source Map 的使用
 
 ## 前言
 
-本文主要聊聊为什么要在 Webpack 中使用 Source Map？以及 Webpack 提供了哪些 Source Map 的使用方式，我们应该在开发环境和生产环境如何使用 Source map
+本文主要聊聊为什么要在 `Webpack` 中使用 `Source Map`？以及 `Webpack` 提供了哪些 `Source Map` 的使用方式，我们应该在开发环境和生产环境如何使用 `Source map`
 
-本文使用的 Webpack 版本是 5.25.1，[Demo Github 地址](https://github.com/GpingFeng/leaarn-source-map/tree/main)
+本文使用的 Webpack 版本是 5.25.1，按照惯例，可以点击查看 [Demo Github 地址](https://github.com/GpingFeng/leaarn-source-map/tree/main)
 
 ## Webpack 打包出来的代码有什么问题？
 
@@ -34,13 +34,13 @@ app.append(heading)
 
 
 
-点进去 `source` 中，你可能是一脸懵逼的，因为代码是压缩混淆的，你根本不知道哪里报错了。这就是我们需要 Source Map 的重要原因
+点进去 `source` 中，你可能是一脸懵逼的，因为代码是压缩混淆的，你根本不知道哪里报错了。这就是我们需要 `Source Map` 的重要原因
 
 ![ ](https://tva1.sinaimg.cn/large/008eGmZEgy1gp8pki7lxqj30yg0khwpw.jpg)
 
 ## 什么是 Source Map
 
-**`Source Map`， 顾名思义，是保存源代码映射关系的文件**。上面提到的，我们找不到报错的文件的相关信息，那有没有一个拥有源文件与打包后文件的映射关系的文件，让它来告诉我们呢？它就是 Source Map 文件
+**`Source Map`， 顾名思义，是保存源代码映射关系的文件**。上面提到的，我们找不到报错的文件的相关信息，那有没有一个拥有源文件与打包后文件的映射关系的文件，让它来告诉我们呢？这个文件就是` Source Map` 文件
 
 ![](https://tva1.sinaimg.cn/large/008eGmZEgy1gp8pkplpa0j30k60ccdfs.jpg)
 
@@ -48,19 +48,19 @@ app.append(heading)
 
 ## 如何使用 Source Map
 
-假如我们有了 Source Map 文件，我们如何使用它呢？我们只需要在打包后的文件的末尾加上：
+假如我们有了 `Source Map` 文件，我们如何使用它呢？我们只需要在打包后的文件的末尾加上：
 
 ```js
 //# sourceMappingURL=main.bundle.js.map
 ```
 
-sourceMappingURL 指向 `Source Map` 文件的 `URL`
+`sourceMappingURL` 指向 `Source Map` 文件的 `URL`
 
 
 
 ## Source Map 文件解析
 
-Source Map 文件大致如下所示：
+`Source Map` 文件大致如下所示：
 
 ```js
 {
@@ -87,7 +87,7 @@ Source Map 文件大致如下所示：
 
 ## Webpack 中 Source Map
 
-了解了 `Source Map` 的一些基础概念后，我们来看看在 Webpack 是如何使用 Source Map
+了解了 `Source Map` 的一些基础概念后，我们来看看在 Webpack 是如何使用 `Source Map`
 
 我们先来看看 Webpack 中的 [devtool](https://webpack.docschina.org/configuration/devtool/) 配置
 
@@ -121,7 +121,7 @@ app.append(heading)
 //# sourceMappingURL=main.bundle.js.map
 ```
 
-然后同级目录下 `main.bundle.js.map`，是比较详细的
+然后同级目录下 `main.bundle.js.map`，是比较详细的 Source Map 信息
 
 ```js
 {
@@ -139,15 +139,15 @@ app.append(heading)
 }
 ```
 
-经过打包之后，重新查看我们的页面，是可以看到具体的报错的行数和列数（可以具体定位到某一列）
+经过打包之后，重新查看我们的页面，是可以看到具体的报错的行数和列数（**可以具体定位到某一列**）
 
 ![](https://tva1.sinaimg.cn/large/008eGmZEgy1gpml3upk0mj30pu05g3z5.jpg)
 
-![image-20210417113405705](https://tva1.sinaimg.cn/large/008eGmZEgy1gppcekv22vj30s409s40k.jpg)
+![](https://tva1.sinaimg.cn/large/008eGmZEgy1gppcekv22vj30s409s40k.jpg)
 
 ### devtool: 'cheap-source-map'
 
- yarn build 打包后，我们发现 mapping  部分不一样。主要是因为 cheap 不生成列信息，所以会少一些。我们测试的代码比较少，所以看起来区别不大，但如果代码量很大的时候，实际上会差别挺大的。具体的表现的话，跟上面有点差不多，就是点进去详情的时候，光标不会自动跳到具体某一列
+ yarn build 打包后，我们发现 mapping  部分不一样。主要是因为 cheap 不生成列信息，所以会少一些。我们测试的代码比较少，所以看起来区别不大，但如果代码量很大的时候，实际上会差别挺大的。具体的表现的话，跟上面有点差不多，就是点进去详情的时候，光标不会自动跳到具体某一列。具体到某一行其实我们开发的时候并不是刚需，毕竟你定位到某一行的时候，基本可以确定问题了
 
 ```diff
 {
@@ -188,7 +188,7 @@ app.append(heading)
 
 ### devtool: 'eval-source-map'
 
-打包出来只有 `main.bundle.js`。`eval-source-map` - 每个模块使用 `eval()` 执行，并且 `source map` 转换为 `DataUrl` 后添加到 `eval()` 中。这个模式跟 source map 放在一个全新的文件中，演示效果不再重复
+打包出来只有 `main.bundle.js`。`eval-source-map`  —— 每个模块使用 `eval()` 执行，并且 `source map` 转换为 `DataUrl` 后添加到 `eval()` 中。演示效果不再重复
 
 大致的代码如下：
 
@@ -198,6 +198,7 @@ app.append(heading)
 	var __webpack_modules__ = ({
 /***/ "./src/index.js":
 /***/ (() => {
+// 留意这一行
 eval("console.log('Interesting!!!'); // Create heading node\n\nvar heading = document.createElement('h1');\nheading.textContent = 'Interesting!';\nconsole.log(a); // 这一行会报错\n// Append heading node to the DOM\n\nvar app = document.querySelector('#root');\napp.append(heading);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly93ZWJwYWNrNS10ZW1wbGF0ZS8uL3NyYy9pbmRleC5qcz9iNjM1Il0sIm5hbWVzIjpbImNvbnNvbGUiLCJsb2ciLCJoZWFkaW5nIiwiZG9jdW1lbnQiLCJjcmVhdGVFbGVtZW50IiwidGV4dENvbnRlbnQiLCJhIiwiYXBwIiwicXVlcnlTZWxlY3RvciIsImFwcGVuZCJdLCJtYXBwaW5ncyI6IkFBQUFBLE9BQU8sQ0FBQ0MsR0FBUixDQUFZLGdCQUFaLEUsQ0FDQTs7QUFDQSxJQUFNQyxPQUFPLEdBQUdDLFFBQVEsQ0FBQ0MsYUFBVCxDQUF1QixJQUF2QixDQUFoQjtBQUNBRixPQUFPLENBQUNHLFdBQVIsR0FBc0IsY0FBdEI7QUFDQUwsT0FBTyxDQUFDQyxHQUFSLENBQVlLLENBQVosRSxDQUFnQjtBQUNoQjs7QUFDQSxJQUFNQyxHQUFHLEdBQUdKLFFBQVEsQ0FBQ0ssYUFBVCxDQUF1QixPQUF2QixDQUFaO0FBQ0FELEdBQUcsQ0FBQ0UsTUFBSixDQUFXUCxPQUFYIiwic291cmNlc0NvbnRlbnQiOlsiY29uc29sZS5sb2coJ0ludGVyZXN0aW5nISEhJylcbi8vIENyZWF0ZSBoZWFkaW5nIG5vZGVcbmNvbnN0IGhlYWRpbmcgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdoMScpXG5oZWFkaW5nLnRleHRDb250ZW50ID0gJ0ludGVyZXN0aW5nISdcbmNvbnNvbGUubG9nKGEpOyAvLyDov5nkuIDooYzkvJrmiqXplJlcbi8vIEFwcGVuZCBoZWFkaW5nIG5vZGUgdG8gdGhlIERPTVxuY29uc3QgYXBwID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcignI3Jvb3QnKVxuYXBwLmFwcGVuZChoZWFkaW5nKSJdLCJmaWxlIjoiLi9zcmMvaW5kZXguanMuanMiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./src/index.js\n");
 /***/ })
 	});
@@ -251,7 +252,7 @@ app.append(heading)
 
 ### 开发环境
 
-对于开发环境，通常希望更快速的 source map，需要添加到 bundle 中以增加体积为代价，但是对于生产环境，则希望更精准的 source map，需要从 bundle 中分离并独立存在。
+对于开发环境，通常希望更快速的 source map，需要添加到 bundle 中，这样代价就是会增加体积。但是对于生产环境，则希望更精准的 source map，需要从 bundle 中分离并独立存在。
 
 对于开发环境，`eval`, `eval-source-map`, `eval-cheap-source-map`, `eval-cheap-module-source-map` 等都是可以的。个人推荐使用 `eval-cheap-module-source-map`
 
@@ -277,7 +278,7 @@ app.append(heading)
 
 ## 总结
 
-因为 Webpack 打包会将代码混淆和压缩等，所以我们需要 Source Map 给我们解析出源文件，方便我们定位查看问题。Webpack 提供了很多种 devtool 的配置，但我们需要掌握`source map`、`eval`、`cheap`、`inline`、`module` 的大致具体含义，这样我们能够举一反三。对于生产环境和开发环境，我们需要采取不同的 `source map`策略，开发环境注重开发效率，生产环境则注重性能和安全。
+因为 `Webpack` 打包会将代码混淆和压缩等，所以我们需要 `Source Map` 给我们解析出源文件，方便我们定位查看问题。`Webpack` 提供了很多种 `devtool` 的配置，但我们需要掌握`source map`、`eval`、`cheap`、`inline`、`module` 的大致具体含义，这样我们就能够举一反三。对于生产环境和开发环境，我们需要采取不同的 `source map`策略，开发环境注重开发效率，生产环境则注重性能和安全。
 
 
 
@@ -287,5 +288,5 @@ app.append(heading)
 
 ## 参考
 
-- https://juejin.cn/post/6844903450644316174
-- https://segmentfault.com/a/1190000008315937
+- [[webpack] devtool 里的 7 种 SourceMap 模式是什么鬼？](https://juejin.cn/post/6844903450644316174)
+-  [打破砂锅问到底：详解 Webpack 中的 sourcemap](https://segmentfault.com/a/1190000008315937)
