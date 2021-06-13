@@ -1,6 +1,8 @@
 * JavaScript
   * [精度丢失](number.md)
   * [Mac 中左右滚动返回问题](scroll.md)
+* Vue
+  * [函数式组件使用](func.md)
 * CSS
   * [font-family 继承失效问题](font.md)
   * [伪类不生效的原因](class.md)
