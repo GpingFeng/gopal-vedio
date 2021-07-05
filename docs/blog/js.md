@@ -8,100 +8,131 @@
 
 1. `[,,,].length`
 
-   1. 0
-   2. 3
-   3. 4
-   4. SyntaxError
+   a. 0
+
+   b. 3
+
+   c. 4
+
+   d. SyntaxError
 
    
 
 2. 10,2
 
-   1. 10.2
-   2. 10
-   3. 2
-   4. 20
+   a. 10.2
+
+   b. 10
+
+   c. 2
+
+   d. 20
 
    
 
 3. true == "true"
 
-   1. true
-   2. false
+   a. true
+
+   b. false
 
    
 
 4. 010 - 03
 
-   1. 7
-   2. 5
-   3. 3
-   4. NaN
+   a. 7
+
+   b. 5
+
+   c. 3
+
+   d. NaN
 
    
 
 5. **1/0 > Math.pow(10, 1000)**
 
-   1. true
-   2. false
-   3. NaN
-   4. SyntaxError
+   a. true
+
+   b. false
+
+   c. NaN
+
+   d. SyntaxError
 
    
 
 6. **0/0**
 
-   1. 0
-   2. Infinity
-   3. NaN
-   4. SyntaxError
+   a. 0
+
+   b. Infinity
+
+   c. NaN
+
+   d. SyntaxError
 
    
 
 7. **true++**
 
-   1. 2
-   2. undefined
-   3. NaN
-   4. SyntaxError
+   a. 2
+
+   b. undefined
+
+   c. NaN
+
+   d. SyntaxError
 
    
 
 8. true + ("true" - 0)
 
-   1. 1
-   2. 2
-   3. NaN
-   4. SyntaxError
+   a. 1
+
+   b. 2
+
+   c. NaN
+
+   d. SyntaxError
 
    
 
 9. **undefined + false**
 
-   1. "undefinedfalse"
-   2. 0
-   3. NaN
-   4. SyntaxError
+   a. "undefinedfalse"
+
+   b. 0
+
+   c. NaN
+
+   d. SyntaxError
 
    
 
 10. **NaN++**
 
-    1. NaN
-    2. Undefined
-    3. TypeError
-    4. SyntaxError
+    a. NaN
+
+    b. Undefined
+
+    c. TypeError
+
+    d. SyntaxError
 
 ## 答案
 
 1. `[,,,].length`
 
-   1. 0
-   2. 3
-   3. 4
-   4. SyntaxError
+   a. 0
 
-   解析：b。稀疏数组，`[,,]` 中间的元素为 `empty` ，这种我们就称为稀疏数组，我们也可以通过类似 new Array(2) 的方式创建稀疏数组。那为什么不是 4 而是 3 呢？这个跟 JavaScript 的[尾后逗号](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Trailing_commas) (Trailing commas) 有关。MDN 中的解析如下：
+   b. 3
+
+   c. 4
+
+   d. SyntaxError
+
+   解析：b。稀疏数组，`[,,]` 中间的元素为 `empty` ，这种我们就称为稀疏数组，我们也可以通过类似 new Array(2) 的方式创建稀疏数组。那为什么不是 4 而是 3 呢？这个跟 JavaScript 的尾后逗号有关。[MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Trailing_commas) 中的解析如下：
 
    > **尾后逗号** （有时叫做 “终止逗号”）在向 JavaScript 代码添加元素、参数、属性时十分有用。如果你想要添加新的属性，并且上一行已经使用了尾后逗号，你可以仅仅添加新的一行，而不需要修改上一行。这使得版本控制的代码比较（diff）更加清晰，代码编辑过程中遇到的麻烦更少。
 
@@ -130,12 +161,15 @@
 
 2. 10,2
 
-   1. 10.2
-   2. 10
-   3. 2
-   4. 20
+   a. 10.2
 
-   解析：c。逗号操作符只返回最后一个操作符的值。这允许你创建一个复合表达式，在其中计算多个表达式，复合表达式为最后一个表达式的值。在 for  循环中可能会用到。
+   b. 10
+
+   c. 2
+
+   d. 20
+
+   解析：c。逗号操作符只返回最后一个操作符的值。这允许你创建一个复合表达式，在其中计算多个表达式，复合表达式为最后一个表达式的值。在 for  循环中可能会用到。看到评论中没整明白这个的，可以看 [MDN]()
 
    
 
@@ -154,8 +188,9 @@
 
 3. true == "true"
 
-   1. true
-   2. false
+   a. true
+
+   b. false
 
    解析：b。根据隐式类型转换的规则。
 
@@ -167,19 +202,25 @@
 
 4. 010 - 03
 
-   1. 7
-   2. 5
-   3. 3
-   4. NaN
+   a. 7
+
+   b. 5
+
+   c. 3
+
+   d. NaN
 
    解析：b。010 被 JavaScript 视为八进制数。因此，它的值是以8为基数的。010 被解析成 8，减 3 得 5。
 
 5. **1/0 > Math.pow(10, 1000)**
 
-   1. true
-   2. false
-   3. NaN
-   4. SyntaxError
+   a. true
+
+   b. false
+
+   c. NaN
+
+   d. SyntaxError
 
    解析：b。两个表达式都是 Infinity。Infinity 两者相等。
 
@@ -191,19 +232,25 @@
 
 6. **0/0**
 
-   1. 0
-   2. Infinity
-   3. NaN
-   4. SyntaxError
+   a. 0
+
+   b. Infinity
+
+   c. NaN
+
+   d. SyntaxError
 
    解析：由于等式 `0/0` 是没有有意义的数值答案，输出简单地是 `NaN`。
 
 7. **true++**
 
-   1. 2
-   2. undefined
-   3. NaN
-   4. SyntaxError
+   a. 2
+
+   b. undefined
+
+   c. NaN
+
+   d. SyntaxError
 
    解析：d。会存在以下的怪异行为，undefined 不会报错。【这里我也找不到合适的理由去解释】。
 
@@ -223,10 +270,13 @@
 
 8. true + ("true" - 0)
 
-   1. 1
-   2. 2
-   3. NaN
-   4. SyntaxError
+   a. 1
+
+   b. 2
+
+   c. NaN
+
+   d. SyntaxError
 
    解析：同 3。
 
@@ -236,10 +286,13 @@
 
 9. **undefined + false**
 
-   1. "undefinedfalse"
-   2. 0
-   3. NaN
-   4. SyntaxError
+   a. "undefinedfalse"
+
+   b. 0
+
+   c. NaN
+
+   d. SyntaxError
 
    解析：`false` 可以转换为数字，`undefined` 不能。
 
@@ -263,10 +316,13 @@
 
 10. **NaN++**
 
-    1. NaN
-    2. Undefined
-    3. TypeError
-    4. SyntaxError
+    a. NaN
+
+    b. Undefined
+
+    c. TypeError
+
+    d. SyntaxError
 
     答案：a。`NaN` 不是一个数字，所以它不能递增。这也意味着 `NaN` 和 `NaN++` 表示相同的值。
 
