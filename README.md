@@ -11,5 +11,11 @@ npm i docsify-cli -g
 docsify serve docs
 ```
 
+## 更新记录
+- 2022.11.19 - 2022.11.25
+  - Vue $listener
+  - Vue provide / inject
+  - v-model 语法糖
+
 ## 参考
 - [Tips, tricks and best practices of front-end development](https://getfrontend.tips/)
