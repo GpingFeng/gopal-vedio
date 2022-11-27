@@ -1,0 +1,1 @@
+通过 provide 和 inject 实现跨组件通信。
